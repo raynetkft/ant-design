@@ -24,8 +24,10 @@ import moment from 'moment';
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
 | addon | called from timepicker panel to render some addon to its bottom | function | - |
+| allowEmpty | allow clearing text | boolean | true |
 | className | className of picker | string | '' |
-| defaultOpenValue | to highlight values in panel when there is no selected value | [moment](http://momentjs.com/) | moment() |
+| clearText | clear tooltip of icon | string | clear |
+| defaultOpenValue | default open panel value, used to set utcOffset,locale if value/defaultValue absent | [moment](http://momentjs.com/) | moment() |
 | defaultValue | to set default time | [moment](http://momentjs.com/) | - |
 | disabled | determine whether the TimePicker is disabled | boolean | false |
 | disabledHours | to specify the hours that cannot be selected | function() | - |
@@ -41,5 +43,8 @@ import moment from 'moment';
 | value | to set time | [moment](http://momentjs.com/) | - |
 | onChange | a callback function, can be executed when the selected time is changing | function(time: moment, timeString: string): void | - |
 | onOpenChange | a callback function which will be called while panel opening/closing | (open: boolean): void | - |
+| hourStep | interval between hours in picker |	number | 1 |
+| minuteStep |	interval between minutes in picker | number | 1 |
+| secondStep |	interval between seconds in picker | number | 1 |
 
 <style>.code-box-demo .ant-time-picker { margin: 0 8px 12px 0; }</style>

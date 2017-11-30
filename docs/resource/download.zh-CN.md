@@ -23,11 +23,11 @@ title: 资源下载
 <a target="_blank" href="http://library.ant.design" class="resource-card">
   <img src="https://zos.alipayobjects.com/rmsportal/qXrCHrsuyrINSeerFOerLcTTFZiEzHAJ.png">
   <span class="resource-card-content">
-    <span class="resource-card-title">Ant Design Library v2.0.1</span>
+    <span class="resource-card-title">Ant Design Library</span>
     <span class="resource-card-description">一套强大的 Ant Design 的 Axure 部件库</span>
   </span>
 </a>
-<a target="_blank" href="https://github.com/ant-design/ant-design/releases/download/resource/iconfont-2.10.x.zip" class="resource-card">
+<a target="_blank" href="https://github.com/ant-design/ant-design/releases/download/resource/iconfont-3.x.zip" class="resource-card">
   <img src="https://os.alipayobjects.com/rmsportal/UEpOFKUQTZaUfnW.png">
   <span class="resource-card-content">
     <span class="resource-card-title">Web Font</span>

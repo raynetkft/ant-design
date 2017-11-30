@@ -25,8 +25,10 @@ import moment from 'moment';
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | addon | 选择框底部显示自定义的内容 | function | 无 |
+| allowEmpty | 是否展示清除按钮 | boolean | true |
 | className | 选择器类名 | string | '' |
-| defaultOpenValue | 无选中值时，面板打开时高亮的值 | [moment](http://momentjs.com/) | moment() |
+| clearText | 清除按钮的提示文案 | string | clear |
+| defaultOpenValue | 当 defaultValue/value 不存在时，可以设置面板打开时默认选中的值 | [moment](http://momentjs.com/) | moment() |
 | defaultValue | 默认时间 | [moment](http://momentjs.com/) | 无 |
 | disabled | 禁用全部操作 | boolean | false |
 | disabledHours | 禁止选择部分小时选项 | function() | 无 |
@@ -42,5 +44,8 @@ import moment from 'moment';
 | value | 当前时间 | [moment](http://momentjs.com/) | 无 |
 | onChange | 时间发生变化的回调 | function(time: moment, timeString: string): void | 无 |
 | onOpenChange | 面板打开/关闭时的回调 | (open: boolean): void | 无 |
+| hourStep | 小时选项间隔 |	number | 1 |
+| minuteStep | 分钟选项间隔 | number | 1 |
+| secondStep | 秒选项间隔 | number | 1 |
 
 <style>.code-box-demo .ant-time-picker { margin: 0 8px 12px 0; }</style>
