@@ -24,7 +24,7 @@ npm-debug.log
 nohup.out
 _site
 _data
-dist
+__dist
 /lib
 /es
 elasticsearch-*
