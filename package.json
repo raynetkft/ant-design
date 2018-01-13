@@ -62,11 +62,7 @@
     "rc-input-number": "~4.0.0",
     "rc-menu": "~6.2.0",
     "rc-notification": "~3.0.0",
-<<<<<<< HEAD
-    "rc-pagination": "~1.12.11",
-=======
     "rc-pagination": "~1.14.0",
->>>>>>> 0f0deff479d8ee9090c276f5cdea8b3296422c5c
     "rc-progress": "~2.2.2",
     "rc-rate": "~2.4.0",
     "rc-select": "~7.5.0",
