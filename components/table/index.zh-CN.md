@@ -61,6 +61,7 @@ const columns = [{
 | defaultExpandedRowKeys | 默认展开的行 | string\[] | - |
 | expandedRowKeys | 展开的行，控制属性 | string\[] | - |
 | expandedRowRender | 额外的展开行 | Function(record):ReactNode | - |
+| expandRowByClick | 通过点击行来展开子行 | boolean | `false` |
 | footer | 表格尾部 | Function(currentPageData) |  |
 | indentSize | 展示树形数据时，每层缩进的宽度，以 px 为单位 | number | 15 |
 | loading | 页面是否加载中 | boolean\|[object](https://ant.design/components/spin-cn/#API) ([更多](https://github.com/ant-design/ant-design/issues/4544#issuecomment-271533135)) | false |
@@ -119,8 +120,8 @@ const columns = [{
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| getCheckboxProps | 选择框的默认属性配置 | Function(record) | - |
 | fixed | 把选择框列固定在左边 | boolean | - |
+| getCheckboxProps | 选择框的默认属性配置 | Function(record) | - |
 | hideDefaultSelections | 去掉『全选』『反选』两个默认选项 | boolean | false |
 | selectedRowKeys | 指定选中项的 key 数组，需要和 onChange 进行配合 | string\[] | \[] |
 | selections | 自定义选择项 [配置项](#selection), 设为 `true` 时使用默认选择项 | object\[]\|boolean | true |
@@ -142,14 +143,14 @@ const columns = [{
 
 ```jsx
 import { Table } from 'antd';
-import { TableColumnConfig } from 'antd/lib/table/Table';
+import { ColumnProps } from 'antd/lib/table';
 
 interface IUser {
   key: number;
   name: string;
 }
 
-const columns: TableColumnConfig<IUser>[] = [{
+const columns: ColumnProps<IUser>[] = [{
   key: 'name',
   title: 'Name',
   dataIndex: 'name',

@@ -3,8 +3,7 @@ import TimePickerPanel from 'rc-time-picker/lib/Panel';
 import classNames from 'classnames';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { generateShowHourMinuteSecond } from '../time-picker';
-
-declare const require: Function;
+import enUS from './locale/en_US';
 
 function getColumns({ showHour, showMinute, showSecond, use12Hours }: any) {
   let column = 0;
@@ -80,9 +79,16 @@ export default function wrapPicker(Picker: React.ComponentClass<any>, defaultFor
       this.picker = node;
     }
 
-    getDefaultLocale() {
-      const locale = require('./locale/en_US');
-      return locale.default || locale;
+    getDefaultLocale = () => {
+      const result = {
+        ...enUS,
+        ...this.props.locale,
+      };
+      result.lang = {
+        ...result.lang,
+        ...(this.props.locale || {}).lang,
+      };
+      return result;
     }
 
     renderPicker = (locale: any, localeCode: string) => {

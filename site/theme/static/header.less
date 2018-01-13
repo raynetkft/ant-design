@@ -1,12 +1,13 @@
 @header-height: 64px;
+@menu-item-border: 2px;
 
 #header {
-  transition: opacity 0.5s;
+  transition: all 0.3s;
   background: #fff;
   box-shadow: 0 2px 8px rgba(240, 241, 242, 65);
   position: relative;
   z-index: 10;
-
+  max-width: 100%;
   &.home-nav-bottom {
     background: rgba(255, 255, 255, 0.9);
     border-bottom-color: #ebedee;
@@ -34,17 +35,20 @@
   height: @header-height;
   line-height: @header-height;
   text-decoration: none;
+  white-space: nowrap;
   img {
     height: 32px;
-    margin-right: 14px;
+    margin-right: 16px;
   }
   img + img {
-    height: 16.5px;
+    height: 16px;
+    position: relative;
+    top: 1px;
   }
 }
 
 #search-box {
-  border-left: 1px solid #ebedee;
+  border-left: 1px solid @site-border-color-split;
   float: left;
   height: 22px;
   line-height: 22px;
@@ -58,26 +62,29 @@
   top: 0.5px;
 }
 
-#search-box .ant-select {
+#search-box input {
   font-size: 14px;
   margin-top: -5px;
   width: 200px;
-}
-
-#search-box .ant-select-selection {
   border: 0;
   box-shadow: none;
+  background: transparent;
+
+  &::placeholder {
+    color: #a3b1bf;
+  }
 }
 
-#search-box .ant-input {
-  border: 0;
-  box-shadow: none;
-}
-
+.header-lang-button,
 .version {
   float: right;
   margin-top: 20px;
   margin-left: 16px;
+}
+
+.header-lang-button {
+  color: @text-color;
+  border-color: @border-color-base;
   margin-right: 40px;
 }
 
@@ -91,19 +98,19 @@
 
     & > .ant-menu-item {
       height: @header-height;
-      line-height: @header-height;
+      line-height: @header-height - @menu-item-border - 2px;
       min-width: 72px;
-      border-top: 2px solid transparent;
+      border-top: @menu-item-border solid transparent;
 
       &:hover {
-        border-top: 2px solid @primary-color;
-        border-bottom: 2px solid transparent;
+        border-top: @menu-item-border solid @primary-color;
+        border-bottom: @menu-item-border solid transparent;
       }
     }
 
     & > .ant-menu-item-selected {
-      border-top: 2px solid @primary-color;
-      border-bottom: 2px solid transparent;
+      border-top: @menu-item-border solid @primary-color;
+      border-bottom: @menu-item-border solid transparent;
       a {
         color: @primary-color;
       }

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { findDOMNode } from 'react-dom';
 import RcMenu, { Divider, ItemGroup } from 'rc-menu';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -68,8 +69,10 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
   };
   static contextTypes = {
     siderCollapsed: PropTypes.bool,
+    collapsedWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   };
   switchModeFromInline: boolean;
+  leaveAnimationExecutedWhenInlineCollapsed: boolean;
   inlineOpenKeys: string[] = [];
   constructor(props: MenuProps) {
     super(props);
@@ -103,6 +106,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     };
   }
   componentWillReceiveProps(nextProps: MenuProps, nextContext: SliderContext) {
+    const { prefixCls } = this.props;
     if (this.props.mode === 'inline' &&
         nextProps.mode !== 'inline') {
       this.switchModeFromInline = true;
@@ -113,7 +117,8 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     }
     if ((nextProps.inlineCollapsed && !this.props.inlineCollapsed) ||
         (nextContext.siderCollapsed && !this.context.siderCollapsed)) {
-      this.switchModeFromInline = !!this.state.openKeys.length;
+      this.switchModeFromInline =
+        !!this.state.openKeys.length && !!findDOMNode(this).querySelectorAll(`.${prefixCls}-submenu-open`).length;
       this.inlineOpenKeys = this.state.openKeys;
       this.setState({ openKeys: [] });
     }
@@ -223,6 +228,15 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
       menuProps.openTransitionName = menuOpenAnimation;
     } else {
       menuProps.openAnimation = menuOpenAnimation;
+    }
+
+    // https://github.com/ant-design/ant-design/issues/8587
+    const { collapsedWidth } = this.context;
+    if (
+      this.getInlineCollapsed() &&
+      (collapsedWidth === 0 || collapsedWidth === '0' || collapsedWidth === '0px')
+    ) {
+      return null;
     }
 
     return <RcMenu {...this.props} {...menuProps} />;

@@ -10,11 +10,12 @@
 @slider-tooltip-arrow-width: 4px;
 @slider-tooltip-distance: @slider-tooltip-arrow-width + 4px;
 @slider-tooltip-arrow-color: @slider-tooltip-bg;
+@slider-margin: 14px 6px 10px;
 
 .@{slider-prefix-cls} {
   .reset-component;
   position: relative;
-  margin: 10px 6px;
+  margin: @slider-margin;
   padding: 4px 0;
   height: 12px;
   cursor: pointer;
@@ -53,6 +54,12 @@
     border: solid 2px @primary-3;
     background-color: @component-background;
     transition: border-color .3s, transform .3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+
+    &:focus {
+      border-color: tint(@primary-color, 20%);
+      box-shadow: 0 0 0 5px tint(@primary-color, 50%);
+      outline: none;
+    }
 
     &.@{ant-prefix}-tooltip-open {
       border-color: @primary-color;

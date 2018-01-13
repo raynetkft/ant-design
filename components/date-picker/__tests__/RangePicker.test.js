@@ -1,8 +1,10 @@
 import React from 'react';
 import { mount, render } from 'enzyme';
 import moment from 'moment';
-import { RangePicker } from '../';
+import DatePicker from '../';
 import focusTest from '../../../tests/shared/focusTest';
+
+const { RangePicker } = DatePicker;
 
 describe('RangePicker', () => {
   focusTest(RangePicker);
@@ -61,6 +63,20 @@ describe('RangePicker', () => {
       .simulate('mouseEnter');
     rangeCalendarWrapper = mount(wrapper.find('Trigger').instance().getComponent());
     expect(rangeCalendarWrapper.find('.ant-calendar-selected-day').length).toBe(2);
+  });
+
+  it('should trigger onCalendarChange when change value', () => {
+    const onCalendarChangeFn = jest.fn();
+    const wrapper = mount(
+      <RangePicker
+        getCalendarContainer={trigger => trigger}
+        onCalendarChange={onCalendarChangeFn}
+        open
+      />
+    );
+    const rangeCalendarWrapper = mount(wrapper.find('Trigger').instance().getComponent());
+    rangeCalendarWrapper.find('.ant-calendar-cell').at(15).simulate('click');
+    expect(onCalendarChangeFn).toHaveBeenCalled();
   });
 
   // issue: https://github.com/ant-design/ant-design/issues/5872

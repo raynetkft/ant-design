@@ -47,11 +47,11 @@ export interface TableComponents {
 
 export interface TableLocale {
   filterTitle?: string;
-  filterConfirm?: string;
-  filterReset?: string;
-  emptyText?: string;
-  selectAll?: string;
-  selectInvert?: string;
+  filterConfirm?: React.ReactNode;
+  filterReset?: React.ReactNode;
+  emptyText?: React.ReactNode | (() => React.ReactNode);
+  selectAll?: React.ReactNode;
+  selectInvert?: React.ReactNode;
 }
 
 export type RowSelectionType = 'checkbox' | 'radio';
@@ -82,10 +82,12 @@ export interface TableProps<T> {
   rowKey?: string | ((record: T, index: number) => string);
   rowClassName?: (record: T, index: number) => string;
   expandedRowRender?: any;
+  defaultExpandAllRows?: boolean;
   defaultExpandedRowKeys?: string[] | number[];
   expandedRowKeys?: string[] | number[];
   expandIconAsCell?: boolean;
   expandIconColumnIndex?: number;
+  expandRowByClick?: boolean;
   onExpandedRowsChange?: (expandedRowKeys: string[] | number[]) => void;
   onExpand?: (expanded: boolean, record: T) => void;
   onChange?: (pagination: PaginationProps | boolean, filters: string[], sorter: Object) => any;

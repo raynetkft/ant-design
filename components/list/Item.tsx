@@ -9,7 +9,7 @@ export interface ListItemProps {
   children?: React.ReactNode;
   prefixCls?: string;
   style?: React.CSSProperties;
-  extra: React.ReactNode;
+  extra?: React.ReactNode;
   actions?: Array<React.ReactNode>;
   grid?: ListGridType;
 }
@@ -18,10 +18,10 @@ export interface ListItemMetaProps {
   avatar?: React.ReactNode;
   className?: string;
   children?: React.ReactNode;
-  description: React.ReactNode;
+  description?: React.ReactNode;
   prefixCls?: string;
   style?: React.CSSProperties;
-  title: React.ReactNode;
+  title?: React.ReactNode;
 }
 
 export const Meta = (props: ListItemMetaProps) => {

@@ -18,6 +18,7 @@ export interface AbstractInputProps {
   className?: string;
   defaultValue?: any;
   value?: any;
+  tabIndex?: number;
   style?: React.CSSProperties;
 }
 
@@ -27,17 +28,18 @@ export interface InputProps extends AbstractInputProps {
   id?: number | string;
   name?: string;
   size?: 'large' | 'default' | 'small';
-  maxLength?: string;
+  maxLength?: number;
   disabled?: boolean;
   readOnly?: boolean;
   addonBefore?: React.ReactNode;
   addonAfter?: React.ReactNode;
-  onPressEnter?: React.FormEventHandler<any>;
-  onKeyDown?: React.FormEventHandler<any>;
+  onPressEnter?: React.FormEventHandler<HTMLInputElement>;
+  onKeyDown?: React.FormEventHandler<HTMLInputElement>;
+  onKeyUp?: React.FormEventHandler<HTMLInputElement>;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  onClick?: React.FormEventHandler<any>;
-  onFocus?: React.FormEventHandler<any>;
-  onBlur?: React.FormEventHandler<any>;
+  onClick?: React.FormEventHandler<HTMLInputElement>;
+  onFocus?: React.FormEventHandler<HTMLInputElement>;
+  onBlur?: React.FormEventHandler<HTMLInputElement>;
   autoComplete?: string;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
@@ -74,6 +76,7 @@ export default class Input extends React.Component<InputProps, any> {
     autosize: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
     onPressEnter: PropTypes.func,
     onKeyDown: PropTypes.func,
+    onKeyUp: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     prefix: PropTypes.node,
@@ -138,12 +141,17 @@ export default class Input extends React.Component<InputProps, any> {
       [wrapperClassName]: (addonBefore || addonAfter),
     });
 
+    const groupClassName = classNames(`${props.prefixCls}-group-wrapper`, {
+      [`${props.prefixCls}-group-wrapper-sm`]: props.size === 'small',
+      [`${props.prefixCls}-group-wrapper-lg`]: props.size === 'large',
+    });
+
     // Need another wrapper for changing display:table to display:inline-block
     // and put style prop in wrapper
     if (addonBefore || addonAfter) {
       return (
         <span
-          className={`${props.prefixCls}-group-wrapper`}
+          className={groupClassName}
           style={props.style}
         >
           <span className={className}>
@@ -181,9 +189,13 @@ export default class Input extends React.Component<InputProps, any> {
       </span>
     ) : null;
 
+    const affixWrapperCls = classNames(props.className, `${props.prefixCls}-affix-wrapper`, {
+      [`${props.prefixCls}-affix-wrapper-sm`]: props.size === 'small',
+      [`${props.prefixCls}-affix-wrapper-lg`]: props.size === 'large',
+    });
     return (
       <span
-        className={classNames(props.className, `${props.prefixCls}-affix-wrapper`)}
+        className={affixWrapperCls}
         style={props.style}
       >
         {prefix}

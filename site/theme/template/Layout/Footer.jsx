@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { Modal, message, Row, Col, Button } from 'antd';
-import { isLocalStorageNameSupported, loadScript, getLocalizedPathname, isZhCN } from '../utils';
+import { Modal, message, Row, Col } from 'antd';
+import { isLocalStorageNameSupported, loadScript } from '../utils';
 import ColorPicker from '../Color/ColorPicker';
 
 class Footer extends React.Component {
@@ -25,8 +25,8 @@ class Footer extends React.Component {
     //   1. 点击『知道了』之后不再提示
     //   2. 超过截止日期后不再提示
     if (
-      localStorage.getItem('antd@2.0.0-notification-sent') !== 'true' &&
-        Date.now() < new Date('2016/10/14').getTime()
+      localStorage.getItem('antd@3.0.0-notification-sent') !== 'true' &&
+        Date.now() < new Date('2017/12/20').getTime()
     ) {
       this.infoNewVersion();
     }
@@ -64,45 +64,30 @@ class Footer extends React.Component {
       title: messages['app.publish.title'],
       content: (
         <div>
-          <img src="https://os.alipayobjects.com/rmsportal/nyqBompsynAQCpJ.svg" alt="Ant Design" />
+          <img src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" alt="Ant Design" />
           <p>
             {messages['app.publish.greeting']}
-            <a target="_blank" rel="noopener noreferrer" href="/changelog">antd@2.0.0</a>
+            <a target="_blank" rel="noopener noreferrer" href="/changelog">antd@3.0.0</a>
             {messages['app.publish.intro']}
             {messages['app.publish.old-version-guide']}
-            <a target="_blank" rel="noopener noreferrer" href="http://1x.ant.design">1x.ant.design</a>
+            <a target="_blank" rel="noopener noreferrer" href="http://2x.ant.design">2x.ant.design</a>
             {messages['app.publish.old-version-tips']}
           </p>
         </div>
       ),
       okText: 'OK',
-      onOk: () => localStorage.setItem('antd@2.0.0-notification-sent', 'true'),
+      onOk: () => localStorage.setItem('antd@3.0.0-notification-sent', 'true'),
       className: 'new-version-info-modal',
       width: 470,
     });
   }
 
-  handleLangChange = () => {
-    const { pathname } = this.props.location;
-    const currentProtocol = `${window.location.protocol}//`;
-    const currentHref = window.location.href.substr(currentProtocol.length);
-
-    if (isLocalStorageNameSupported()) {
-      localStorage.setItem('locale', isZhCN(pathname) ? 'en-US' : 'zh-CN');
-    }
-
-    window.location.href = currentProtocol + currentHref.replace(
-      window.location.pathname,
-      getLocalizedPathname(pathname, !isZhCN(pathname)),
-    );
-  }
-
   render() {
     return (
-      <footer id="footer" className="dark">
+      <footer id="footer">
         <div className="footer-wrap">
           <Row>
-            <Col lg={6} sm={24} xs={24}>
+            <Col md={6} sm={24} xs={24}>
               <div className="footer-center">
                 <h2>Ant Design</h2>
                 <div>
@@ -156,7 +141,7 @@ class Footer extends React.Component {
                 </div>
               </div>
             </Col>
-            <Col lg={6} sm={24} xs={24}>
+            <Col md={6} sm={24} xs={24}>
               <div className="footer-center">
                 <h2><FormattedMessage id="app.footer.resources" /></h2>
                 <div>
@@ -177,7 +162,7 @@ class Footer extends React.Component {
                   <FormattedMessage id="app.footer.motion" />
                 </div>
                 <div>
-                  <a target="_blank" rel="noopener noreferrer" href="http://library.ant.design/">AntD Library</a>
+                  <a target="_blank" rel="noopener noreferrer" href="http://library.ant.design/">Axure Library</a>
                   <span> - </span>
                   <FormattedMessage id="app.footer.antd-library" />
                 </div>
@@ -188,7 +173,7 @@ class Footer extends React.Component {
                 </div>
               </div>
             </Col>
-            <Col lg={6} sm={24} xs={24}>
+            <Col md={6} sm={24} xs={24}>
               <div className="footer-center">
                 <h2><FormattedMessage id="app.footer.community" /></h2>
                 <div>
@@ -233,17 +218,12 @@ class Footer extends React.Component {
                 </div>
               </div>
             </Col>
-            <Col lg={6} sm={24} xs={24}>
+            <Col md={6} sm={24} xs={24}>
               <div className="footer-center">
                 <h2>
                   <img className="title-icon" src="https://gw.alipayobjects.com/zos/rmsportal/nBVXkrFdWHxbZlmMbsaH.svg" alt="" />
                   <FormattedMessage id="app.footer.more-product" />
                 </h2>
-                <div>
-                  <a target="_blank" rel="noopener noreferrer" href="http://ant.design/">Ant Design</a>
-                  <span> - </span>
-                  <FormattedMessage id="app.footer.ant-design" />
-                </div>
                 <div>
                   <a target="_blank" rel="noopener noreferrer" href="https://antv.alipay.com/">AntV</a>
                   <span> - </span>
@@ -259,14 +239,8 @@ class Footer extends React.Component {
           </Row>
         </div>
         <Row className="bottom-bar">
-          <Col lg={4} sm={24}>
-            <div className="translate-button">
-              <Button ghost onClick={this.handleLangChange}>
-                <FormattedMessage id="app.header.lang" />
-              </Button>
-            </div>
-          </Col>
-          <Col lg={20} sm={24}>
+          <Col md={4} sm={24} />
+          <Col md={20} sm={24}>
             <span
               style={{ lineHeight: '16px', paddingRight: 12, marginRight: 11, borderRight: '1px solid rgba(255, 255, 255, 0.55)' }}
             >

@@ -17,6 +17,7 @@ export interface AbstractSelectProps {
   disabled?: boolean;
   style?: React.CSSProperties;
   placeholder?: string;
+  defaultActiveFirstOption?: boolean;
   dropdownClassName?: string;
   dropdownStyle?: React.CSSProperties;
   dropdownMenuStyle?: React.CSSProperties;
@@ -41,9 +42,11 @@ export interface SelectProps extends AbstractSelectProps {
   onDeselect?: (value: SelectValue) => any;
   onBlur?: () => any;
   onFocus?: () => any;
+  onInputKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  maxTagCount?: number;
+  maxTagPlaceholder?: React.ReactNode | ((omittedValues: SelectValue[]) => React.ReactNode);
   dropdownMatchSelectWidth?: boolean;
   optionFilterProp?: string;
-  defaultActiveFirstOption?: boolean;
   labelInValue?: boolean;
   getPopupContainer?: (triggerNode: Element) => HTMLElement;
   tokenSeparators?: string[];
@@ -108,6 +111,16 @@ export default class Select extends React.Component<SelectProps, {}> {
     this.rcSelect = node;
   }
 
+  getNotFoundContent(locale: SelectLocale) {
+    const { notFoundContent, mode } = this.props;
+    const isCombobox = mode === 'combobox';
+    if (isCombobox) {
+      // AutoComplete don't have notFoundContent defaultly
+      return notFoundContent === undefined ? null : notFoundContent;
+    }
+    return notFoundContent === undefined ? locale.notFoundContent : notFoundContent;
+  }
+
   renderSelect = (locale: SelectLocale) => {
     const {
       prefixCls,
@@ -121,7 +134,7 @@ export default class Select extends React.Component<SelectProps, {}> {
       [`${prefixCls}-sm`]: size === 'small',
     }, className);
 
-    let { notFoundContent, optionLabelProp } = this.props;
+    let { optionLabelProp } = this.props;
     const isCombobox = mode === 'combobox';
     if (isCombobox) {
       // children 带 dom 结构时，无法填入输入框
@@ -134,8 +147,6 @@ export default class Select extends React.Component<SelectProps, {}> {
       combobox: isCombobox,
     };
 
-    const notFoundContentLocale = isCombobox ?
-      null : notFoundContent || locale.notFoundContent;
     return (
       <RcSelect
         {...restProps}
@@ -143,7 +154,7 @@ export default class Select extends React.Component<SelectProps, {}> {
         prefixCls={prefixCls}
         className={cls}
         optionLabelProp={optionLabelProp || 'children'}
-        notFoundContent={notFoundContentLocale}
+        notFoundContent={this.getNotFoundContent(locale)}
         ref={this.saveSelect}
       />
     );

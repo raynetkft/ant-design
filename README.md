@@ -20,6 +20,10 @@ An enterprise-class UI design language and React-based implementation.
 
 [中文 README](README-zh_CN.md)
 
+## 3.0 Released Now! :tada::tada::tada:
+
+[Announcing Ant Design 3.0](https://medium.com/ant-design/announcing-ant-design-3-0-70e3e65eca0c)
+
 ## Features
 
 - An enterprise-class UI design language for web applications.
@@ -35,12 +39,12 @@ An enterprise-class UI design language and React-based implementation.
 
 ## Let's build a better antd together [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-`antd` is an open source project; improvements are welcomed. If you are interested in contributing to `antd`, you can watch this repository, join in [discussion](https://github.com/ant-design/ant-design/issues?q=is%3Aopen+is%3Aissue+label%3ADiscussion), or try to implement some [features which have been accepted](https://github.com/ant-design/ant-design/issues?q=is%3Aopen+is%3Aissue+label%3A%22PR+welcome%22). Actually, there are [many ways](https://opensource.guide/how-to-contribute/) to contribute. And we are always happy to [offer collaborator permission](https://github.com/ant-design/ant-design/issues/3222) for some active contributors.
+Read our [contributing guide](./.github/CONTRIBUTING.md).
 
 ## Install
 
 ```bash
-npm install antd
+npm install antd --save
 ```
 
 ## Usage
@@ -56,33 +60,7 @@ And import style manually:
 import 'antd/dist/antd.css';  // or 'antd/dist/antd.less'
 ```
 
-### Use modularized antd
-
-- Manually import
-
-   ```jsx
-   import DatePicker from 'antd/lib/date-picker';  // for js
-   import 'antd/lib/date-picker/style/css';        // for css
-   // import 'antd/lib/date-picker/style';         // that will import less
-   ```
-
-- Use [babel-plugin-import](https://github.com/ant-design/babel-plugin-import)
-
-   ```js
-   // .babelrc or babel-loader option
-   {
-     "plugins": [
-       ["import", { "libraryName": "antd", "style": "css" }] // `style: true` for less
-     ]
-   }
-   ```
-
-   Then you can import components from antd, equivalent to import manually below.
-
-   ```jsx
-   // import js and css modularly, parsed by babel-plugin-import
-   import { DatePicker } from 'antd';
-   ```
+Or [import components on demand](https://ant.design/docs/react/getting-started#Import-on-Demand)
 
 ### TypeScript
 

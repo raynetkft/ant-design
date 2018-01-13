@@ -31,6 +31,8 @@ ul.toc > li {
   text-overflow: ellipsis;
   color: @site-text-color;
   width: 110px;
+  border-left: 1px solid transparent;
+  margin-left: -1px;
 }
 
 .toc a:hover {
@@ -48,6 +50,8 @@ ul.toc > li {
   right: 20px;
   .ant-affix {
     background: #fff;
+    overflow: auto;
+    max-height: ~"calc(100vh - 16px)";
   }
 }
 .toc-affix-bottom {

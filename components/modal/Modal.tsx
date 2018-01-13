@@ -36,6 +36,7 @@ export interface ModalProps {
   cancelText?: string;
   /** 点击蒙层是否允许关闭*/
   maskClosable?: boolean;
+  destroyOnClose?: boolean;
   style?: React.CSSProperties;
   wrapClassName?: string;
   maskTransitionName?: string;
@@ -43,6 +44,9 @@ export interface ModalProps {
   className?: string;
   getContainer?: (instance: React.ReactInstance) => HTMLElement;
   zIndex?: number;
+  bodyStyle?: React.CSSProperties;
+  maskStyle?: React.CSSProperties;
+  mask?: boolean;
 }
 
 export interface ModalFuncProps {
@@ -175,11 +179,11 @@ export default class Modal extends React.Component<ModalProps, {}> {
 
     return (
       <Dialog
-        onClose={this.handleCancel}
-        footer={footer === undefined ? defaultFooter : footer}
         {...this.props}
+        footer={footer === undefined ? defaultFooter : footer}
         visible={visible}
         mousePosition={mousePosition}
+        onClose={this.handleCancel}
       />
     );
   }

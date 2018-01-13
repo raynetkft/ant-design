@@ -5,9 +5,8 @@ import DropdownButton from './dropdown-button';
 import warning from '../_util/warning';
 
 export interface DropDownProps {
-  trigger?: ('click' | 'hover')[];
+  trigger?: ('click' | 'hover'| 'contextMenu')[];
   overlay: React.ReactNode;
-  style?: React.CSSProperties;
   onVisibleChange?: (visible?: boolean) => void;
   visible?: boolean;
   disabled?: boolean;
@@ -15,7 +14,9 @@ export interface DropDownProps {
   getPopupContainer?: (triggerNode: Element) => HTMLElement;
   prefixCls?: string;
   className?: string;
+  transitionName?: string;
   placement?: 'topLeft' | 'topCenter' | 'topRight' | 'bottomLeft' | 'bottomCenter' | 'bottomRight';
+  forceRender?: boolean;
 }
 
 export default class Dropdown extends React.Component<DropDownProps, any> {
@@ -28,7 +29,10 @@ export default class Dropdown extends React.Component<DropDownProps, any> {
   };
 
   getTransitionName() {
-    const { placement = '' } = this.props;
+    const { placement = '', transitionName } = this.props;
+    if (transitionName !== undefined) {
+      return transitionName;
+    }
     if (placement.indexOf('top') >= 0) {
       return 'slide-down';
     }

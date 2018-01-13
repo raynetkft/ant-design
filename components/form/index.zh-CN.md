@@ -28,8 +28,6 @@ title: Form
 </Form.Item>
 ```
 
-> 注：标准表单中一律使用大号控件。
-
 ## API
 
 ### Form
@@ -57,8 +55,8 @@ CustomizedForm = Form.create({})(CustomizedForm);
 
 | 参数 | 说明 | 类型 |
 | --- | --- | --- |
-| validateMessages | 默认校验信息，可用于把默认错误信息改为中文等，格式与 [newMessages](https://github.com/yiminghe/async-validator/blob/master/src/messages.js) 返回值一致 | Object { [nested.path]: String } |
 | mapPropsToFields | 把父组件的属性映射到表单项上（如：把 Redux store 中的值读出），需要对返回值中的表单域数据用 [`Form.createFormField`](#Form.createFormField) 标记 | (props) => Object{ fieldName: FormField { value } } |
+| validateMessages | 默认校验信息，可用于把默认错误信息改为中文等，格式与 [newMessages](https://github.com/yiminghe/async-validator/blob/master/src/messages.js) 返回值一致 | Object { [nested.path]&#x3A; String } |
 | onFieldsChange | 当 `Form.Item` 子节点的值发生改变时触发，可以把对应的值转存到 Redux store | Function(props, fields) |
 | onValuesChange | 任一表单域的值发生改变时的回调 | (props, values) => void |
 
@@ -171,7 +169,7 @@ CustomizedForm = Form.create({})(CustomizedForm);
 
 ```jsx
 import { Form } from 'antd';
-import { FormComponentProps } from 'antd/lib/form/Form';
+import { FormComponentProps } from 'antd/lib/form';
 
 interface UserFormProps extends FormComponentProps {
   age: number;
