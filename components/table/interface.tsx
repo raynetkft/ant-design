@@ -29,6 +29,7 @@ export interface ColumnProps<T> {
   children?: ColumnProps<T>[];
   onCellClick?: (record: T, event: any) => void;
   onCell?: (record: T) => any;
+  onHeaderCell?: (props: ColumnProps<T>) => any;
 }
 
 export interface TableComponents {
@@ -152,6 +153,7 @@ export interface SelectionBoxProps {
   type?: RowSelectionType;
   defaultSelection: string[];
   rowIndex: string;
+  name?: string;
   disabled?: boolean;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }

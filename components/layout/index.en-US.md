@@ -43,7 +43,7 @@ The first level navigation is inclined left near a logo, and the secondary menu 
 
 - **Enlarge the size of the font**
 
-  `12px`、`14px` is a standard font size of navigations，`14px` is used for the first and the second level of the navigation. You can choose a approprigate font size in terms of the level of your navigation.
+  `12px`、`14px` is a standard font size of navigations，`14px` is used for the first and the second level of the navigation. You can choose a appropriate font size in terms of the level of your navigation.
 
 ## Component Overview
 
@@ -77,6 +77,7 @@ The wrapper.
 | -------- | ----------- | ---- | ------- |
 | className | container className | string | - |
 | style | to customize the styles | object | - |
+| hasSider | whether contain Sider in children, don't have to assign it normally. Useful in ssr avoid style flickering | boolean | - |
 
 > APIs of `Layout.Header` `Layout.Footer` `Layout.Content` are the same as that of `Layout`.
 
@@ -103,9 +104,10 @@ The sidebar.
 ```js
 {
   xs: '480px',
-  sm: '768px',
-  md: '992px',
-  lg: '1200px',
-  xl: '1600px',
+  sm: '576px',
+  md: '768px',
+  lg: '992px',
+  xl: '1200px',
+  xxl: '1600px',
 }
 ```
