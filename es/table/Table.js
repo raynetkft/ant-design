@@ -272,7 +272,7 @@ var Table = function (_React$Component) {
                 return React.createElement(
                     'span',
                     { onClick: stopPropagation },
-                    React.createElement(SelectionBox, { type: type, store: _this.store, rowIndex: rowIndex, disabled: props.disabled, onChange: handleChange, defaultSelection: _this.getDefaultSelection() })
+                    React.createElement(SelectionBox, _extends({ type: type, store: _this.store, rowIndex: rowIndex, onChange: handleChange, defaultSelection: _this.getDefaultSelection() }, props))
                 );
             };
         };
@@ -296,7 +296,7 @@ var Table = function (_React$Component) {
                 onChange.apply(null, _this.prepareParamsArguments(_extends({}, _this.state, { pagination: nextPagination })));
             }
         };
-        _this.renderTable = function (contextLocale) {
+        _this.renderTable = function (contextLocale, loading) {
             var _classNames;
 
             var locale = _extends({}, contextLocale, _this.props.locale);
@@ -320,7 +320,7 @@ var Table = function (_React$Component) {
             if ('expandIconColumnIndex' in restProps) {
                 expandIconColumnIndex = restProps.expandIconColumnIndex;
             }
-            return React.createElement(RcTable, _extends({ key: 'table' }, restProps, { onRow: _this.onRow, components: _this.components, prefixCls: prefixCls, data: data, columns: columns, showHeader: showHeader, className: classString, expandIconColumnIndex: expandIconColumnIndex, expandIconAsCell: expandIconAsCell, emptyText: locale.emptyText }));
+            return React.createElement(RcTable, _extends({ key: 'table' }, restProps, { onRow: _this.onRow, components: _this.components, prefixCls: prefixCls, data: data, columns: columns, showHeader: showHeader, className: classString, expandIconColumnIndex: expandIconColumnIndex, expandIconAsCell: expandIconAsCell, emptyText: !loading.spinning && locale.emptyText }));
         };
         warning(!('columnsPageRange' in props || 'columnsPageSize' in props), '`columnsPageRange` and `columnsPageSize` are removed, please use ' + 'fixed columns instead, see: https://u.ant.design/fixed-columns.');
         _this.columns = props.columns || normalizeColumns(props.children);
@@ -698,6 +698,9 @@ var Table = function (_React$Component) {
                     sortButton,
                     filterDropdown
                 );
+                if (sortButton || filterDropdown) {
+                    column.className = classNames(prefixCls + '-column-has-filters', column.className);
+                }
                 return column;
             });
         }
@@ -851,32 +854,36 @@ var Table = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var _this11 = this;
+
             var _props3 = this.props,
                 style = _props3.style,
                 className = _props3.className,
                 prefixCls = _props3.prefixCls;
 
             var data = this.getCurrentPageData();
-            var table = React.createElement(
-                LocaleReceiver,
-                { componentName: 'Table', defaultLocale: defaultLocale.Table },
-                this.renderTable
-            );
-            // if there is no pagination or no data,
-            // the height of spin should decrease by half of pagination
-            var paginationPatchClass = this.hasPagination() && data && data.length !== 0 ? prefixCls + '-with-pagination' : prefixCls + '-without-pagination';
             var loading = this.props.loading;
             if (typeof loading === 'boolean') {
                 loading = {
                     spinning: loading
                 };
             }
+            var table = React.createElement(
+                LocaleReceiver,
+                { componentName: 'Table', defaultLocale: defaultLocale.Table },
+                function (locale) {
+                    return _this11.renderTable(locale, loading);
+                }
+            );
+            // if there is no pagination or no data,
+            // the height of spin should decrease by half of pagination
+            var paginationPatchClass = this.hasPagination() && data && data.length !== 0 ? prefixCls + '-with-pagination' : prefixCls + '-without-pagination';
             return React.createElement(
                 'div',
                 { className: classNames(prefixCls + '-wrapper', className), style: style },
                 React.createElement(
                     Spin,
-                    _extends({}, loading, { className: loading ? paginationPatchClass + ' ' + prefixCls + '-spin-holder' : '' }),
+                    _extends({}, loading, { className: loading.spinning ? paginationPatchClass + ' ' + prefixCls + '-spin-holder' : '' }),
                     table,
                     this.renderPagination()
                 )

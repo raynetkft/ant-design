@@ -1,10 +1,8 @@
 /// <reference types="react" />
 import * as React from 'react';
 export declare type CollapseType = 'clickTrigger' | 'responsive';
-export interface SiderProps {
-    style?: React.CSSProperties;
+export interface SiderProps extends React.HTMLAttributes<HTMLDivElement> {
     prefixCls?: string;
-    className?: string;
     collapsible?: boolean;
     collapsed?: boolean;
     defaultCollapsed?: boolean;
