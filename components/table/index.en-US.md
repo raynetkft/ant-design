@@ -69,7 +69,7 @@ const columns = [{
 | rowClassName | Row's className | Function(record, index):string | - |
 | rowKey | Row's unique key, could be a string or function that returns a string | string\|Function(record):string | `key` |
 | rowSelection | Row selection [config](#rowSelection) | object | null |
-| scroll | Whether table can be scrolled in x/y direction, `x` or `y` can be a number that indicates the width and height of table body | object | - |
+| scroll | Set horizontal or vertical scrolling, can also be used to specify the width and height of the scroll area. It is recommended to set a number for `x`, if you want to set it to `true`, you need to add style `.ant-table td { white-space: nowrap; }`. | { x: number \| true, y: number } | - |
 | showHeader | Whether to show table header | boolean | `true` |
 | size | Size of table | `default` \| `middle` \| `small` | `default` |
 | title | Table title renderer | Function(currentPageData) |  |
@@ -91,12 +91,12 @@ Same as `onRow` `onHeaderRow` `onCell` `onHeaderCell`
       onMouseEnter: () => {},  // mouse enter row
       onXxxx...
     };
-  )}
+  }}
   onHeaderRow={(column) => {
     return {
       onClick: () => {},        // click header row
     };
-  )}
+  }}
 />
 ```
 
@@ -120,6 +120,7 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | fixed | Set column to be fixed: `true`(same as left) `'left'` `'right'` | boolean\|string | `false` |
 | key | Unique key of this column, you can ignore this prop if you've set a unique `dataIndex` | string | - |
 | render | Renderer of the table cell. The return value should be a ReactNode, or an object for [colSpan/rowSpan config](#components-table-demo-colspan-rowspan) | Function(text, record, index) {} | - |
+| align | specify how content is aligned | 'left' \| 'right' \| 'center' | 'left' |
 | sorter | Sort function for local sort, see [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)'s compareFunction. If you need sort buttons only, set to `true` | Function\|boolean | - |
 | sortOrder | Order of sorted values: `'ascend'` `'descend'` `false` | boolean\|string | - |
 | title | Title of this column | string\|ReactNode | - |

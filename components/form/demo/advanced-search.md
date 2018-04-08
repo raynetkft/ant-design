@@ -52,7 +52,12 @@ class AdvancedSearchForm extends React.Component {
       children.push(
         <Col span={8} key={i} style={{ display: i < count ? 'block' : 'none' }}>
           <FormItem label={`Field ${i}`}>
-            {getFieldDecorator(`field-${i}`)(
+            {getFieldDecorator(`field-${i}`, {
+              rules: [{
+                required: true,
+                message: 'Input something!',
+              }],
+            })(
               <Input placeholder="placeholder" />
             )}
           </FormItem>
@@ -107,8 +112,8 @@ ReactDOM.render(
   display: flex;
 }
 
-.ant-advanced-search-form .ant-form-item-label {
-  overflow: visible;
+.ant-advanced-search-form .ant-form-item-control-wrapper {
+  flex: 1;
 }
 ````
 

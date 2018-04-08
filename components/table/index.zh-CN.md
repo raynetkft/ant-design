@@ -70,7 +70,7 @@ const columns = [{
 | rowClassName | 表格行的类名 | Function(record, index):string | - |
 | rowKey | 表格行 key 的取值，可以是字符串或一个函数 | string\|Function(record):string | 'key' |
 | rowSelection | 列表项是否可选择，[配置项](#rowSelection) | object | null |
-| scroll | 横向或纵向支持滚动，也可用于指定滚动区域的宽高度：`{{ x: true, y: 300 }}` | object | - |
+| scroll | 设置横向或纵向滚动，也可用于指定滚动区域的宽和高，建议为 `x` 设置一个数字，如果要设置为 `true`，需要配合样式 `.ant-table td { white-space: nowrap; }` | { x: number \| true, y: number } | - |
 | showHeader | 是否显示表头 | boolean | true |
 | size | 正常或迷你类型，`default` or `small` | string | default |
 | title | 表格标题 | Function(currentPageData) |  |
@@ -93,12 +93,12 @@ const columns = [{
       onMouseEnter: () => {},  // 鼠标移入行
       onXxxx...
     };
-  )}
+  }}
   onHeaderRow={(column) => {
     return {
       onClick: () => {},        // 点击表头行
     };
-  )}
+  }}
 />
 ```
 
@@ -121,6 +121,7 @@ const columns = [{
 | fixed | 列是否固定，可选 `true`(等效于 left) `'left'` `'right'` | boolean\|string | false |
 | key | React 需要的 key，如果已经设置了唯一的 `dataIndex`，可以忽略这个属性 | string | - |
 | render | 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return里面可以设置表格[行/列合并](#components-table-demo-colspan-rowspan) | Function(text, record, index) {} | - |
+| align | 设置列内容的对齐方式 | 'left' \| 'right' \| 'center' | 'left' |
 | sorter | 排序函数，本地排序使用一个函数(参考 [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) 的 compareFunction)，需要服务端排序可设为 true | Function\|boolean | - |
 | sortOrder | 排序的受控属性，外界可用此控制列的排序，可设置为 `'ascend'` `'descend'` `false` | boolean\|string | - |
 | title | 列头显示文字 | string\|ReactNode | - |

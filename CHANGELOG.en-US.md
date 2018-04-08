@@ -15,6 +15,65 @@ timeline: true
 
 ---
 
+## 3.4.1
+
+`2018-04-08`
+
+- 🐞 Fix type error of Badge. [#9931](https://github.com/ant-design/ant-design/issues/9931)
+- 💄 Improve clicking region of Card `actions`. [#9882](https://github.com/ant-design/ant-design/issues/9882)
+- 🐞 Fix Divider style issue when used with float elements. [#9956](https://github.com/ant-design/ant-design/issues/9956)
+- 🐞 Fix style issue of Form in advanced-search mode. [#9907](https://github.com/ant-design/ant-design/issues/9907)
+- 🐞 Add `onHeaderRow` TypeScript type definitions for Table. [#9902](https://github.com/ant-design/ant-design/pull/9902) [@Nokecy](https://github.com/Nokecy)
+- 💄 Improve the customized-icon demo of Tree. [#9893](https://github.com/ant-design/ant-design/pull/9893)
+- 🐞 Fix image url display with non-image extention in Upload. [#9936](https://github.com/ant-design/ant-design/pull/9936)
+
+## 3.4.0
+
+`2018-04-01`
+
+- Tree
+  - 🛠 In this version, we refactored the underlying code of Tree to resolve some long living issues.
+  - 🌟 Added `defaultExpandParent` for expanding parent at first render.
+  - 🌟 Added `disabled` for disabling the whole tree.
+  - 🌟 Added `TreeNode[icon]` to allow setting custom node icon.
+  - 🌟 Improved the check logic for disabled TreeNode.
+- 🌟 Anchor added `getContainer` for setting the container of scroll content.
+- 🌟 Table added a new less variable `@table-expanded-row-bg`. [#9789](https://github.com/ant-design/ant-design/pull/9789)
+- 🐞 Fixed a less syntax error. [#9832](https://github.com/ant-design/ant-design/pull/9832) [@jojoLockLock](https://github.com/jojoLockLock)
+- 🐞 Fixed `moment.locale` invoking error in LocaleProvider. [#9853](https://github.com/ant-design/ant-design/pull/9853)
+- 🐞 Fixed issue resulting in `style` of WeekPicker not works. [#9848](https://github.com/ant-design/ant-design/issues/9848)
+- 🐞 Fixed type definition of Layout.Sider. [#9885](https://github.com/ant-design/ant-design/pull/9885) [@zachguo](https://github.com/zachguo)
+- 💄 Improved style of Modal for long contents. [#9592](https://github.com/ant-design/ant-design/pull/9592)
+- 🌟 Added new locale Slovenian.
+
+## 3.3.3
+
+`2018-03-25`
+
+- Revert Upload `file` type change in previous version  which causes breaking change.
+
+## 3.3.2
+
+`2018-03-24`
+
+- 🐞 `Carousel`: Upgrade `react-slick` version to fix width calculation. [#3659](https://github.com/ant-design/ant-design/issues/3659)
+- 💄 `Rate`: Adjust `disabled` style. [#9747](https://github.com/ant-design/ant-design/issues/9747)
+- 💄 `Modal`: Adjust `confirm-modal` style to fix display issue when content use grid layout. [#9374](https://github.com/ant-design/ant-design/issues/9374)
+- 💄 `Menu`: Adjust style to fix mouse trigger event region. [#9666](https://github.com/ant-design/ant-design/pull/9666) [@dgeibi](https://github.com/dgeibi)
+- 🐞 `Upload`: Fix type of `file` on `beforeUpload` function. [#9775](https://github.com/ant-design/ant-design/issues/9775)
+- 🐞 `Button`: Fix `two-chinese-words` space not re-calculate when text changed. [4502ad8](https://github.com/ant-design/ant-design/commit/4502ad8376e536c450fa4f27d2a5855be5a153e7)
+
+## 3.3.1
+
+`2018-03-18`
+
+- 💄 Tweak danger button focus style.
+- 🐞 Fix a show error when the value of enterButton is a button element.  [#9639](https://github.com/ant-design/ant-design/issues/9639)
+- 🐞 Fix missing key of `column.title` in Table .[#9658](https://github.com/ant-design/ant-design/issues/9658) [@terence55](https://github.com/terence55)
+- 🐞 Fix `scroll: { x: true }` not working if `.ant-table-scroll table` width is `auto`. [#9704](https://github.com/ant-design/ant-design/pull/9704)
+- 🐞 Fix when the helper message disappears, the input box will shake.  [#8831](https://github.com/ant-design/ant-design/issues/8831)
+- 🐞 Fix isMoment call in `TimePicker` will report error in parcel. [85c78e4](https://github.com/ant-design/ant-design/commit/85c78e49a91737c2841dc42621db21ca248b62b4)
+- 🐞 Tweak `Table` border radius. [#9674](https://github.com/ant-design/ant-design/pull/9674)
 ## 3.3.0
 
 `2018-03-12`

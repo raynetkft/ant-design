@@ -13,8 +13,24 @@ const previewFile = (file: File, callback: Function) => {
   reader.readAsDataURL(file);
 };
 
+const extname = (url: string) => {
+  if (!url) {
+    return '';
+  }
+  const temp = url.split('/');
+  const filename = temp[temp.length - 1];
+  return (/\.[^./\\]*$/.exec(filename) || [''])[0];
+};
+
 const isImageUrl = (url: string): boolean => {
-  return /^data:image\//.test(url) || /\.(webp|svg|png|gif|jpg|jpeg)$/.test(url);
+  if (/^data:image\//.test(url) || /\.(webp|svg|png|gif|jpg|jpeg)$/.test(url)) {
+    return true;
+  } else if (/^data:/.test(url)) { // other file types of base64
+    return false;
+  } else if (extname(url)) { // other file types which have extension
+    return false;
+  }
+  return true;
 };
 
 export default class UploadList extends React.Component<UploadListProps, any> {
@@ -81,14 +97,9 @@ export default class UploadList extends React.Component<UploadListProps, any> {
         } else if (!file.thumbUrl && !file.url) {
           icon = <Icon className={`${prefixCls}-list-item-thumbnail`} type="picture" />;
         } else {
-          let thumbnail = isImageUrl((file.thumbUrl || file.url) as string) ? (
-            <img src={file.thumbUrl || file.url} alt={file.name} />
-          ) : (
-            <Icon
-              type="file"
-              style={{ fontSize: 48, color: 'rgba(0,0,0,0.5)' }}
-            />
-          );
+          let thumbnail = isImageUrl((file.thumbUrl || file.url) as string)
+            ? <img src={file.thumbUrl || file.url} alt={file.name} />
+            : <Icon type="file" className={`${prefixCls}-list-item-icon`} />;
           icon = (
             <a
               className={`${prefixCls}-list-item-thumbnail`}
@@ -140,7 +151,7 @@ export default class UploadList extends React.Component<UploadListProps, any> {
           {file.name}
         </span>
       );
-      const style = (file.url || file.thumbUrl) ? undefined : {
+      const style: React.CSSProperties = {
         pointerEvents: 'none',
         opacity: 0.5,
       };
@@ -149,7 +160,7 @@ export default class UploadList extends React.Component<UploadListProps, any> {
           href={file.url || file.thumbUrl}
           target="_blank"
           rel="noopener noreferrer"
-          style={style}
+          style={(file.url || file.thumbUrl) ? undefined : style}
           onClick={e => this.handlePreview(file, e)}
           title={locale.previewFile}
         >
